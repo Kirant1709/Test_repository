@@ -14,7 +14,7 @@ class InActiveBookManager(models.Manager):
     def get_queryset(self):
 	    return super().get_queryset().filter(is_deleted="Y")        
 
-
+#class is defined below 
 """this is class named Book is defined"""
 class Book(models.Model):
     name = models.CharField(max_length=100)
