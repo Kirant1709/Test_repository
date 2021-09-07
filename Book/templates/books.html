@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Show Books</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+     
+</head>
+
+<body>
+     <h2>Books</h2><hr> 
+     <table border="2" style="width:50%" class="table table-dark table-stiped">
+          <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Price</th>
+            <th>Book Qty</th>
+            <th>Is Book Published </th>
+            <th>Published Date </th>
+            <th>Action</th>
+          
+          </tr>
+           
+          {% for b in all_books %}
+          <tr>
+               <td>{{b.id}}</td>
+               <td>{{b.name}}</td>
+               <td>{{b.price}}</td>
+               <td>{{b.qty}}</td>
+               {% if b.is_published %}
+               <td>Yes</td>
+               {% else %}
+               <td>No</td>
+               {% endif %}   
+               {% if b.published_date %}
+               <td>{{b.published_date}}</td>
+               {% else %}
+               <td>--</td>
+               {% endif %}
+               <td>
+                    {% if book_status != "InActive" %}
+                    <a href="{% url 'update' b.id %}">Edit</a>&nbsp|&nbsp
+                    <a href="{% url 'soft_delete' b.id %}">Soft Delete</a>&nbsp|&nbsp
+                    {% endif %}
+                    <a href="{% url 'delete' b.id %}">Hard Delete</a>
+                    
+               </td>
+                  
+          </tr>
+          {% endfor %}
+        </table>
+
+       <a href="/homepage/" class="btn btn-info">Home Page</a>
+       <a href="{% url 'active_books' %}" class="btn btn-secondary">Show Active Books</a>
+       <a href="{% url 'inactive_books' %}" class="btn btn-dark">Show Inactive Books</a>
+
+
+</body>
+</html>
+
+
